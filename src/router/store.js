@@ -1,20 +1,15 @@
 import { ref } from 'vue'
-// Reaktiv værdi der holder styr på om man er logget ind
+
+// Login-status
 export const setlogin = ref(false)
 
-// Reaktiv liste med brugere og koder (som en "database")
-export const brugerdatabase = ref([
-  { username: 'albert', password: '1234',
-    favoritter: [], historik: [], egneIngredienser: []}
-])
-export const currentUser = ref(null)
+// Aktuel bruger efter login
+export const currentUser = ref(null)  // { userId, username, token }
 
- // her gemmer vi dem man har valgt af indgredienser
+// Valgte ingredienser
 export const valgteIngredienser = ref([])
 
-
-// En lille "test-database" med opskrifter
-
+// Opskrifter der vises i appen
 export const opskrifter = ref([
   {
     navn: 'Pandekager',
@@ -37,12 +32,8 @@ export const opskrifter = ref([
     beskrivelse: 'Bland tun og mayo. Læg i sandwich med agurk og tomat.'
   },
   {
-   navn: 'peporoni pizza',
-   ingredienser: ['peporoni','dej'],
-   beskrivelse: 'ring til abi ned i den lokale.'
-
+    navn: 'Pepperoni pizza',
+    ingredienser: ['peporoni', 'dej'],
+    beskrivelse: 'Ring til abi nede i den lokale.'
   }
-  
-
-
 ])

@@ -28,7 +28,6 @@
   <script setup>
   import { ref } from 'vue'
   import {useRouter} from 'vue-router'
-  import { brugerdatabase } from '../router/store'
 
   const router = useRouter()
 
@@ -37,36 +36,32 @@
   const password = ref('')
   const password2 = ref('')
 
- 
-
-  function signup() {
-    
-    // Viser hvad brugeren forsøger at oprette
-    alert(`Du prøver at oprette dig med:\nbrugernavn: ${username.value}\nKode: ${password.value}`)
-    
-    // Tjek om adgangskoder matcher
-    if (password.value !== password2.value) {
-      alert("Adgangskoderne mastcer ikke")
-      return
-    }
-
-    // Tjek om brugernavn allerede findes
-    const eksisterer = brugerdatabase.value.find(
-      (bruger) => bruger.username === username.value
-    )
   
-    // Hvis det findes, vis besked – ellers gem brugeren
-  if (eksisterer) {
-    alert("brugernavnet er allerede i brug")
-  } else {
-    brugerdatabase.value.push({
+  async function signup() {
+  if (password.value !== password2.value) {
+    alert("Adgangskoderne matcher ikke");
+    return;
+  }
+
+  const res = await fetch('http://localhost:5127/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
       username: username.value,
-      password: password.value,
+      password: password.value
     })
-    alert("bruger oprettet!")
-    router.push('/') // Gå til forsiden
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert("Bruger oprettet!");
+    router.push('/log-in');
+  } else {
+    alert("Fejl: " + data.message);
   }
 }
+
   </script>
   
   <style scoped>

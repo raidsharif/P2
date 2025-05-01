@@ -48,9 +48,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { brugerdatabase, valgteIngredienser } from '../router/store'
 import { currentUser } from '../router/store'
 import { onMounted } from 'vue'
+import { valgteIngredienser } from '../router/store'
 
 const router = useRouter()
 
@@ -136,13 +136,36 @@ const filtreredeIngredienser = computed(() =>
   )
 )
 
-//tager de valgte indgredienser og gør det muligt for opskriftslisten at se dem
-function gotoopskraft() {
-  valgteIngredienser.value = ingredienser.value
-    .filter(i => i.valgt)
-    .map(i => i.navn)
-  router.push('/opskrafterliste')
+async function gotoopskraft() {
+  const valgte = ingredienser.value.filter(i => i.valgt).map(i => i.navn);
+  valgteIngredienser.value = valgte;
+
+  // Gem ingredienser
+  await fetch('http://localhost:5127/gem-ingredienser', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: currentUser.value.userId,
+      ingredients: valgte.join(',')
+    })
+  });
+
+  // Hent forslag
+  const res = await fetch('http://localhost:5127/fetch-recipes', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: currentUser.value.userId,
+      ingredients: valgte.join(',')
+    })
+  });
+
+  const ids = await res.json();
+  console.log("Hentede opskrifter med id'er:", ids);
+
+  router.push('/opskrafterliste');
 }
+
 
 </script>
 

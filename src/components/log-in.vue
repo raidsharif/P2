@@ -22,8 +22,7 @@
   <script setup>
   import { ref } from 'vue'
   import {useRouter} from 'vue-router'
-  import { setlogin, brugerdatabase, currentUser } from '../router/store'
- 
+  import { currentUser, setlogin } from '../router/store'
   
   // Inputdata
   const username = ref('')
@@ -32,25 +31,33 @@
   const router = useRouter()
   
   
-  function login() {
-    alert(`Du prøver at login som:\nbrugernavn: ${username.value}\nKode: ${password.value}`)
-    // Her kan du senere lave rigtig signup-logik
-    
-    // Tjek om brugernavn og kode findes i databasen
-    const bruger = brugerdatabase.value.find( 
-      (bruger) => bruger.username === username.value 
-      && bruger.password === password.value
-    )
 
-    if (bruger) {
-    setlogin.value = true // 🔓 Brugeren er nu logget ind!
-    alert("login godkendt")
-    currentUser.value = bruger // 💚 gem hvem der er logget ind
+
+async function login() {
+  const response = await fetch('http://localhost:5127/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value
+    })
+  })
+
+  const data = await response.json()
+
+  if (data.success) {
+    currentUser.value = {
+      userId: data.userId,
+      username: data.username,
+      token: data.token
+    }
+    setlogin.value = true
+    alert("Login succesfuldt!")
     router.push('/')
   } else {
-  alert("forket navn eller kode!");
-        }
+    alert("Fejl: " + data.message)
   }
+}
 
   
   </script>
