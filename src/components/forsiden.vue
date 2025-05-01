@@ -1,24 +1,34 @@
 <template>
  <div>
-<div class = "login-signup">
- <button> login/opret </button>   
+    <!-- Knap til login eller opret -->
+<div class = "login-signup" v-if="!setlogin">
+ <button @click="gotologinopret"> login/opret </button>   
 </div>
 
+ <!-- Knap til søgning af ny opskrift -->
 <div class = "searchnew">
- <button> søg ny opskrift </button>
+ <button @click="gotosearch"> søg ny opskrift </button>
  </div>
 
-<div class = "oldused">
- <button> historik </button>
+ <!-- Knap til at vise tidligere brugte opskrifter -->
+<div class = "history">
+ <button :disabled="!setlogin" @click="gohistorik">
+  historik <span v-if="!setlogin">🔒</span>
+ </button> 
  </div>
 
+  <!-- Knap til favorit-opskrifter -->
 <div class = "favorite">
-<button> favorit </button>
+<button :disabled="!setlogin" @click="gofavoritter"> 
+favorit <span v-if="!setlogin">🔒</span>
+</button>
 </div>
+
  </div>
 </template>
 
 <style>
+/* Positionering af knapper på siden */
 .login-signup{
 position: absolute;
 top: 20px; 
@@ -31,7 +41,7 @@ top: 40%;
 right: 48%; 
 }
 
-.oldused{
+.history{
 position: absolute;
 top: 50%;
 right: 50%;
@@ -43,4 +53,41 @@ top: 60%;
 right: 50%;    
 }
 
+/* Grå og deaktiveret stil når knapper er låste */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 </style>
+
+
+
+
+
+<script setup>
+// Importerer router, så vi kan skifte side
+import {useRouter} from 'vue-router'
+import { setlogin } from '../router/store';
+
+const router = useRouter();
+
+// Funktion der navigerer til login/opret siden
+function gotologinopret() {
+    router.push('/loginsignup')
+}
+function gotosearch() {
+    router.push('/Enteringredients')
+}
+
+function gohistorik() {
+  router.push('/history')
+}
+
+function gofavoritter() {
+  router.push('/favorites')
+}
+</script>
+
+
+
