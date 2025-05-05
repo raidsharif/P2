@@ -72,6 +72,7 @@ async function tilføjFavorit() {
 }
 </script>
 
+
 <style scoped>
 .guide-container {
   max-width: 600px;
