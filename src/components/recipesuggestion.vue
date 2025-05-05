@@ -50,7 +50,7 @@ onMounted(async () => {
 
 const matchedeOpskrifter = computed(() =>
   opskrifter.value.filter(opskrift =>
-    opskrift.ingredienser.every(ing =>
+    opskrift.ingredienser.some(ing =>
       valgteIngredienser.value.includes(ing)
     )
   )
