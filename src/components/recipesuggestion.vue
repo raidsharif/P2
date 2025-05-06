@@ -16,11 +16,11 @@
     <h3>Vi foreslår:</h3>
     <ul>
       <li v-for="recipe in matchedeOpskrifter" :key="recipe.navn">
-        🍽️ {{ recipe.navn }}
-        <br />
+        <img :src="recipe.billede" alt="Billede af retten" width="200" />
+        <h4>{{ recipe.navn }}</h4>
         <small>Kræver: {{ recipe.ingredienser.join(', ') }}</small>
         <br />
-        <button @click="visGuide(recipe.navn)">📘 Guide</button>
+        <button @click="visGuide(recipe.id)">📘 Guide</button>
         <button v-if="setlogin" @click="tilføjFavorit(recipe)">❤️ Favorit</button>
       </li>
     </ul>
@@ -40,24 +40,27 @@ onMounted(async () => {
     const data = await res.json()
 
     opskrifter.value = data.map(r => ({
-      navn: r.title,
-      ingredienser: r.ingredients.split(', '),
-      beskrivelse: r.instructions,
-      id: r.recipeId
-    }))
+    navn: r.title,
+    ingredienser: r.ingredients.split(', '),
+    beskrivelse: r.instructions,
+    id: r.recipeId,
+    billede: r.imageUrl
+    }));
   }
 })
 
 const matchedeOpskrifter = computed(() =>
   opskrifter.value.filter(opskrift =>
-    opskrift.ingredienser.every(ing =>
-      valgteIngredienser.value.includes(ing)
+    opskrift.ingredienser.some(ing =>
+      valgteIngredienser.value.some(valgt =>
+        ing.toLowerCase().includes(valgt.toLowerCase())
+      )
     )
   )
-)
+);
 
-function visGuide(navn) {
-  router.push(`/guide/${encodeURIComponent(navn)}`)
+function visGuide(id) {
+  router.push(`/guide/${id}`)
 }
 
 async function tilføjFavorit(recipe) {

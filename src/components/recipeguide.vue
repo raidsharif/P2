@@ -27,15 +27,14 @@ const router = useRouter()
 const opskrift = ref(null)
 
 onMounted(async () => {
-  const navn = decodeURIComponent(route.params.navn || '').toLowerCase()
+  const recipeId = Number(route.params.id)
 
   // Hent alle opskrifter
   const res = await fetch('http://localhost:5127/opskrifter')
   const allRecipes = await res.json()
 
-  const match = allRecipes.find(r =>
-    r.title.toLowerCase() === navn
-  )
+  const match = allRecipes.find(r => r.recipeId === recipeId)
+
 
   if (match) {
     opskrift.value = match

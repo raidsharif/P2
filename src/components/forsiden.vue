@@ -77,7 +77,7 @@ function gotologinopret() {
     router.push('/loginsignup')
 }
 function gotosearch() {
-    router.push('/Enteringredients')
+    router.push('/enteringredients')
 }
 
 function gohistorik() {

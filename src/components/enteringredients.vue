@@ -57,11 +57,11 @@ const router = useRouter()
 
 const ingredienser = ref([
   //  Mejeri og basis
-  { navn: 'Æg', valgt: false },
-  { navn: 'Mælk', valgt: false },
+  { navn: 'Chicken', valgt: false },
+  { navn: 'Milk', valgt: false },
   { navn: 'Fløde', valgt: false },
   { navn: 'Smør', valgt: false },
-  { navn: 'Ost', valgt: false },
+  { navn: 'cheese', valgt: false },
   { navn: 'Yoghurt', valgt: false },
 
   //  Kolonialvarer
@@ -103,7 +103,8 @@ const ingredienser = ref([
 
 // adder brugens egne tidligere ingredenser ind i listen
 onMounted(() => {
-  if (currentUser.value && currentUser.value.egneIngredienser.length > 0) {
+  if (currentUser.value && Array.isArray(currentUser.value.egneIngredienser))
+    {
     currentUser.value.egneIngredienser.forEach(navn => {
       ingredienser.value.push({ navn, valgt: false })
     })

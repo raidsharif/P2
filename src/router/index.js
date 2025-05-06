@@ -45,7 +45,7 @@ const router = createRouter({
     component: recipeSuggestion
     },
     {
-      path: '/guide/:navn',
+      path: '/guide/:id',
       name: 'guide',
       component: RecipeGuide
     },
