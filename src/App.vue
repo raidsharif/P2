@@ -2,6 +2,7 @@
 import { RouterView, useRouter } from 'vue-router'
 
 const router = useRouter()
+//test test
 
 function goHome() {
   router.push('/')
