@@ -56,49 +56,48 @@ const router = useRouter()
 
 
 const ingredienser = ref([
-  //  Mejeri og basis
-  { navn: 'Chicken', valgt: false },
-  { navn: 'Milk', valgt: false },
-  { navn: 'Fløde', valgt: false },
-  { navn: 'Smør', valgt: false },
-  { navn: 'cheese', valgt: false },
-  { navn: 'Yoghurt', valgt: false },
 
-  //  Kolonialvarer
-  { navn: 'Mel', valgt: false },
-  { navn: 'Sukker', valgt: false },
-  { navn: 'Salt', valgt: false },
-  { navn: 'Peber', valgt: false },
-  { navn: 'Gær', valgt: false },
-  { navn: 'Ris', valgt: false },
-  { navn: 'Pasta', valgt: false },
-  { navn: 'Bouillon', valgt: false },
-  { navn: 'Olivenolie', valgt: false },
-  { navn: 'Rapsolie', valgt: false },
-  { navn: 'Tomatpuré', valgt: false },
-  { navn: 'Ketchup', valgt: false },
-  { navn: 'Mayonnaise', valgt: false },
+    { navn: 'Chicken', valgt: false },
+    { navn: 'Milk', valgt: false },
+    { navn: 'Cream', valgt: false },
+    { navn: 'Butter', valgt: false },
+    { navn: 'cheese', valgt: false },
+    { navn: 'Yoghurt', valgt: false },
 
-  //   kød og fisk
-  { navn: 'Kylling', valgt: false },
-  { navn: 'oksekød', valgt: false },
-  { navn: 'Tun (på dåse)', valgt: false },
-  { navn: 'Laks', valgt: false },
+    { navn: 'Flour', valgt: false },
+    { navn: 'Sugar', valgt: false },
+    { navn: 'Salt', valgt: false },
+    { navn: 'Pepper', valgt: false },
+    { navn: 'Yeast', valgt: false },
+    { navn: 'Rice', valgt: false },
+    { navn: 'Pasta', valgt: false },
+    { navn: 'Broth', valgt: false },
+    { navn: 'Olive oil', valgt: false },
+    { navn: 'Canola oil', valgt: false },
+    { navn: 'Tomato paste', valgt: false },
+    { navn: 'Ketchup', valgt: false },
+    { navn: 'Mayonnaise', valgt: false },
 
-  //  Grøntsager og frugt
-  { navn: 'Kartofler', valgt: false },
-  { navn: 'Løg', valgt: false },
-  { navn: 'Hvidløg', valgt: false },
-  { navn: 'Tomat', valgt: false },
-  { navn: 'Agurk', valgt: false },
-  { navn: 'Gulerødder', valgt: false },
-  { navn: 'Chili', valgt: false },
-  { navn: 'Peberfrugt', valgt: false },
-  { navn: 'Spinat', valgt: false },
-  { navn: 'Citron', valgt: false },
-  { navn: 'Banan', valgt: false },
-  { navn: 'Æble', valgt: false },
-  { navn: 'Appelsin', valgt: false }
+    { navn: 'Chicken', valgt: false },
+    { navn: 'Beef', valgt: false },
+    { navn: 'Tuna (canned)', valgt: false },
+    { navn: 'Salmon', valgt: false },
+
+    { navn: 'Potatoes', valgt: false },
+    { navn: 'Onion', valgt: false },
+    { navn: 'Garlic', valgt: false },
+    { navn: 'Tomato', valgt: false },
+    { navn: 'Cucumber', valgt: false },
+    { navn: 'Carrots', valgt: false },
+    { navn: 'Chili', valgt: false },
+    { navn: 'Bell pepper', valgt: false },
+    { navn: 'Spinach', valgt: false },
+    { navn: 'Lemon', valgt: false },
+    { navn: 'Banana', valgt: false },
+    { navn: 'Apple', valgt: false },
+    { navn: 'Orange', valgt: false }
+
+
 ])
 
 // adder brugens egne tidligere ingredenser ind i listen
