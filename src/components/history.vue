@@ -1,6 +1,6 @@
 <template>
   <div class="historik">
-    <h2>🕘 Min Historik</h2>
+    <h2>🕘 My History</h2>
 
     <div v-if="historik.length">
       <ul>
@@ -14,7 +14,7 @@
       </ul>
     </div>
     <div v-else>
-      <p>Du har ikke kigget på nogen opskrifter endnu 😴</p>
+      <p>No recipes yet😴</p>
     </div>
   </div>
 </template>

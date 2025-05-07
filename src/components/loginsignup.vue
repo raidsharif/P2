@@ -8,7 +8,7 @@
 
 <!-- Knap til at oprette bruger -->
 <div class = "signup"> 
- <button @click="gotoopret"> opret </button>  
+ <button @click="gotoopret"> register </button>  
 </div>
 
 </div>

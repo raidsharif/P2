@@ -7,18 +7,18 @@
 
  <!-- Knap til søgning af ny opskrift -->
 <div class = "searchnew">
- <button @click="gotosearch"> søg ny opskrift </button>
+ <button @click="gotosearch"> Search for a recipe </button>
  </div>
 
  <!-- Knap til at vise tidligere brugte opskrifter -->
-<div class = "history">
+<div class = "History">
  <button :disabled="!setlogin" @click="gohistorik">
   historik <span v-if="!setlogin">🔒</span>
  </button> 
  </div>
 
   <!-- Knap til favorit-opskrifter -->
-<div class = "favorite">
+<div class = "Favorite">
 <button :disabled="!setlogin" @click="gofavoritter"> 
 favorit <span v-if="!setlogin">🔒</span>
 </button>
@@ -74,18 +74,18 @@ const router = useRouter();
 
 // Funktion der navigerer til login/opret siden
 function gotologinopret() {
-    router.push('/loginsignup')
+    router.push('/Loginsignup')
 }
 function gotosearch() {
-    router.push('/enteringredients')
+    router.push('/Enteringredients')
 }
 
 function gohistorik() {
-  router.push('/history')
+  router.push('/History')
 }
 
 function gofavoritter() {
-  router.push('/favorites')
+  router.push('/Favorites')
 }
 </script>
 

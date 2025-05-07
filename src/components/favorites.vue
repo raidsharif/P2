@@ -1,6 +1,6 @@
 <template>
   <div class="favoritter">
-    <h2>❤️ Mine Favoritter</h2>
+    <h2>❤️ My Favorites</h2>
 
     <div v-if="favoritter.length">
       <ul>
@@ -15,7 +15,7 @@
       </ul>
     </div>
     <div v-else>
-      <p>Du har ingen favoritter endnu 😢</p>
+      <p>No Favorites 😢</p>
     </div>
   </div>
 </template>
