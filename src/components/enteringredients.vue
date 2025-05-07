@@ -141,22 +141,25 @@ async function gotoopskraft() {
   const valgte = ingredienser.value.filter(i => i.valgt).map(i => i.navn);
   valgteIngredienser.value = valgte;
 
+  const userId = currentUser.value?.userId ?? null;
   // Gem ingredienser
-  await fetch('http://localhost:5127/gem-ingredienser', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      userId: currentUser.value.userId,
-      ingredients: valgte.join(',')
-    })
-  });
+  if(userId !== null) {
+    await fetch('http://localhost:5127/gem-ingredienser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: currentUser.value.userId,
+        ingredients: valgte.join(',')
+      })
+    });
+  }
 
   // Hent forslag
   const res = await fetch('http://localhost:5127/fetch-recipes', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      userId: currentUser.value.userId,
+      userId,
       ingredients: valgte.join(',')
     })
   });

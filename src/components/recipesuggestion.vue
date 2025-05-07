@@ -18,6 +18,8 @@
       <li v-for="recipe in matchedeOpskrifter" :key="recipe.navn">
         <img :src="recipe.billede" alt="Billede af retten" width="200" />
         <h4>{{ recipe.navn }}</h4>
+        <p><strong>⏱ Tid:</strong> {{ recipe.tid }} minutter</p>
+        <p><strong>🍽 Portioner:</strong> {{ recipe.portioner }}</p>
         <small>Kræver: {{ recipe.ingredienser.join(', ') }}</small>
         <br />
         <button @click="visGuide(recipe.id)">📘 Guide</button>
@@ -28,26 +30,27 @@
 </template>
 
 <script setup>
-import { valgteIngredienser, opskrifter, currentUser, setlogin } from '../router/store'
-import { computed, onMounted } from 'vue'
+import { valgteIngredienser, currentUser, setlogin } from '../router/store'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
+const opskrifter = ref([])
 const router = useRouter()
 
 onMounted(async () => {
-  if (currentUser.value) {
     const res = await fetch('http://localhost:5127/opskrifter')
     const data = await res.json()
 
     opskrifter.value = data.map(r => ({
-    navn: r.title,
-    ingredienser: r.ingredients.split(', '),
-    beskrivelse: r.instructions,
-    id: r.recipeId,
-    billede: r.imageUrl
+      navn: r.title,
+      ingredienser: r.ingredients?.split(', ') ?? [],
+      beskrivelse: r.instructions,
+      id: r.recipeId,
+      billede: r.imageUrl,
+      tid: r.prepTimeMinutes,
+      portioner: r.servings
     }));
-  }
-})
+});
 
 const matchedeOpskrifter = computed(() =>
   opskrifter.value.filter(opskrift =>

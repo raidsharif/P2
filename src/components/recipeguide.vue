@@ -2,12 +2,17 @@
   <div v-if="opskrift" class="guide-container">
     <h2>{{ opskrift.title }}</h2>
     <img :src="opskrift.imageUrl" style="max-width: 300px;" />
-    <p><strong>Ingredienser:</strong> {{ opskrift.ingredients }}</p>
+    <p><strong>⏱ Tid:</strong> {{ opskrift.prepTimeMinutes }} minutter</p>
+    <p><strong>🍽 Portioner:</strong> {{ opskrift.servings }}</p>
+    <p><strong>Ingredienser:</strong></p>
+    <ul>
+      <li v-for="(ing, i) in opskrift.ingredienser" :key="i">🧂 {{ ing }}</li>
+    </ul>
     <p><strong>Sådan gør du:</strong></p>
     <p>{{ opskrift.instructions }}</p>
 
     <button @click="router.push('/opskrafterliste')">🔙 Tilbage</button>
-    <button @click="tilføjFavorit">❤️ Favorit</button>
+    <button v-if="currentUser" @click="tilføjFavorit">❤️ Favorit</button>
   </div>
 
   <div v-else class="guide-container">
@@ -37,23 +42,22 @@ onMounted(async () => {
 
 
   if (match) {
-    opskrift.value = match
-
-    // Gem i historik (hvis bruger er logget ind)
-    if (currentUser.value) {
-      await fetch('http://localhost:5127/fetch-recipes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: currentUser.value.userId,
-          ingredients: "" // Vi sender tomt, vi vil bare sikre historik bliver gemt
-        })
-      })
-
-      // Bonus: alternativ måde er at lave separat endpoint, fx POST /gem-historik
-      // men jeres fetch-recipes gemmer allerede historik i jeres backend
-    }
+  opskrift.value = {
+    ...match,
+    ingredienser: match.ingredients?.split(', ') ?? []
   }
+
+  if (currentUser.value) {
+    await fetch('http://localhost:5127/fetch-recipes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: currentUser.value.userId,
+        ingredients: ""
+      })
+    })
+  }
+}
 })
   
 async function tilføjFavorit() {
