@@ -52,15 +52,25 @@ onMounted(async () => {
     }));
 });
 
-const matchedeOpskrifter = computed(() =>
-  opskrifter.value.filter(opskrift =>
-    opskrift.ingredienser.some(ing =>
-      valgteIngredienser.value.some(valgt =>
-        ing.toLowerCase().includes(valgt.toLowerCase())
-      )
-    )
-  )
-);
+const matchedeOpskrifter = computed(() => {
+  return opskrifter.value
+    .map(opskrift => {
+      // Calculate matched ingredients count
+      const matchedCount = opskrift.ingredienser.filter(ing =>
+        valgteIngredienser.value.some(valgt =>
+          ing.toLowerCase().includes(valgt.toLowerCase())
+        )
+      ).length;
+
+      return {
+        ...opskrift,
+        matchedCount
+      };
+    })
+    .filter(opskrift => opskrift.matchedCount > 0) // Include only recipes with matches
+    .sort((a, b) => b.matchedCount - a.matchedCount) // Sort by number of matched ingredients
+    .slice(0, 10); // Limit to 10 recipes
+});
 
 function visGuide(id) {
   router.push(`/guide/${id}`)

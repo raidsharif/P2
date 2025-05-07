@@ -12,8 +12,8 @@
     <!-- ✅ Liste over ingredienser (filtreret med søgning) -->
     <ul>
       <li v-for="(item, index) in filtreredeIngredienser" :key="index">
-        <input type="checkbox" v-model="item.valgt" />
-        {{ item.navn }}
+        <input type="checkbox" v-model="item.selected" />
+        {{ item.name }}
       </li>
     </ul>
 
@@ -32,8 +32,8 @@
     <div class="valgte">
       <h3>Du har valgt:</h3>
       <ul>
-        <li v-for="item in ingredienser.filter(i => i.valgt)" :key="item.navn">
-          ✅ {{ item.navn }}
+        <li v-for="item in ingredienser.filter(i => i.selected)" :key="item.name">
+          ✅ {{ item.name }}
         </li>
       </ul>
     </div>
@@ -57,45 +57,45 @@ const router = useRouter()
 
 const ingredienser = ref([
 
-    { navn: 'Chicken', valgt: false },
-    { navn: 'Milk', valgt: false },
-    { navn: 'Cream', valgt: false },
-    { navn: 'Butter', valgt: false },
-    { navn: 'cheese', valgt: false },
-    { navn: 'Yoghurt', valgt: false },
+    { name: 'Chicken', selected: false },
+    { name: 'Milk', selected: false },
+    { name: 'Cream', selected: false },
+    { name: 'Butter', selected: false },
+    { name: 'cheese', selected: false },
+    { name: 'Yoghurt', selected: false },
 
-    { navn: 'Flour', valgt: false },
-    { navn: 'Sugar', valgt: false },
-    { navn: 'Salt', valgt: false },
-    { navn: 'Pepper', valgt: false },
-    { navn: 'Yeast', valgt: false },
-    { navn: 'Rice', valgt: false },
-    { navn: 'Pasta', valgt: false },
-    { navn: 'Broth', valgt: false },
-    { navn: 'Olive oil', valgt: false },
-    { navn: 'Canola oil', valgt: false },
-    { navn: 'Tomato paste', valgt: false },
-    { navn: 'Ketchup', valgt: false },
-    { navn: 'Mayonnaise', valgt: false },
+    { name: 'Flour', selected: false },
+    { name: 'Sugar', selected: false },
+    { name: 'Salt', selected: false },
+    { name: 'Pepper', selected: false },
+    { name: 'Yeast', selected: false },
+    { name: 'Rice', selected: false },
+    { name: 'Pasta', selected: false },
+    { name: 'Broth', selected: false },
+    { name: 'Olive oil', selected: false },
+    { name: 'Canola oil', selected: false },
+    { name: 'Tomato paste', selected: false },
+    { name: 'Ketchup', selected: false },
+    { name: 'Mayonnaise', selected: false },
 
-    { navn: 'Chicken', valgt: false },
-    { navn: 'Beef', valgt: false },
-    { navn: 'Tuna (canned)', valgt: false },
-    { navn: 'Salmon', valgt: false },
+    { name: 'Chicken', selected: false },
+    { name: 'Beef', selected: false },
+    { name: 'Tuna (canned)', selected: false },
+    { name: 'Salmon', selected: false },
 
-    { navn: 'Potatoes', valgt: false },
-    { navn: 'Onion', valgt: false },
-    { navn: 'Garlic', valgt: false },
-    { navn: 'Tomato', valgt: false },
-    { navn: 'Cucumber', valgt: false },
-    { navn: 'Carrots', valgt: false },
-    { navn: 'Chili', valgt: false },
-    { navn: 'Bell pepper', valgt: false },
-    { navn: 'Spinach', valgt: false },
-    { navn: 'Lemon', valgt: false },
-    { navn: 'Banana', valgt: false },
-    { navn: 'Apple', valgt: false },
-    { navn: 'Orange', valgt: false }
+    { name: 'Potatoes', selected: false },
+    { name: 'Onion', selected: false },
+    { name: 'Garlic', selected: false },
+    { name: 'Tomato', selected: false },
+    { name: 'Cucumber', selected: false },
+    { name: 'Carrots', selected: false },
+    { name: 'Chili', selected: false },
+    { name: 'Bell pepper', selected: false },
+    { name: 'Spinach', selected: false },
+    { name: 'Lemon', selected: false },
+    { name: 'Banana', selected: false },
+    { name: 'Apple', selected: false },
+    { name: 'Orange', selected: false }
 
 
 ])
@@ -104,8 +104,8 @@ const ingredienser = ref([
 onMounted(() => {
   if (currentUser.value && Array.isArray(currentUser.value.egneIngredienser))
     {
-    currentUser.value.egneIngredienser.forEach(navn => {
-      ingredienser.value.push({ navn, valgt: false })
+    currentUser.value.egneIngredienser.forEach(name => {
+      ingredienser.value.push({ name, selected: false })
     })
   }
 })
@@ -115,15 +115,15 @@ const soegeord = ref('')
 
 // Tilføj ingrediens manuelt
 function tilfoejIngrediens() {
-  const navn = nyIngrediens.value.trim()
-  if (navn !== '') {
-    ingredienser.value.push({ navn, valgt: true })
+  const name = nyIngrediens.value.trim()
+  if (name !== '') {
+    ingredienser.value.push({ name, selected: true })
     nyIngrediens.value = ''
      // gem i brugerens egne ingredienser
      if (currentUser.value) {
-      const findesAllerede = currentUser.value.egneIngredienser.includes(navn)
+      const findesAllerede = currentUser.value.egneIngredienser.includes(name)
       if (!findesAllerede) {
-      currentUser.value.egneIngredienser.push(navn)
+      currentUser.value.egneIngredienser.push(name)
     }
   }
 }
@@ -132,13 +132,13 @@ function tilfoejIngrediens() {
 // Filtrer listen med søgeord
 const filtreredeIngredienser = computed(() =>
   ingredienser.value.filter((item) =>
-    item.navn.toLowerCase().includes(soegeord.value.toLowerCase())
+    item.name.toLowerCase().includes(soegeord.value.toLowerCase())
   )
 )
 
 async function gotoopskraft() {
-  const valgte = ingredienser.value.filter(i => i.valgt).map(i => i.navn);
-  valgteIngredienser.value = valgte;
+  const selectedI = ingredienser.value.filter(i => i.selected).map(i => i.name);
+  valgteIngredienser.value = selectedI;
 
   const userId = currentUser.value?.userId ?? null;
   // Gem ingredienser
@@ -148,7 +148,7 @@ async function gotoopskraft() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: currentUser.value.userId,
-        ingredients: valgte.join(',')
+        ingredients: selectedI.join(',')
       })
     });
   }
@@ -159,7 +159,7 @@ async function gotoopskraft() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       userId,
-      ingredients: valgte.join(',')
+      ingredients: selectedI.join(',')
     })
   });
 
