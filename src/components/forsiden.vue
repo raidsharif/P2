@@ -45,8 +45,18 @@ Favorites <span v-if="!setlogin">🔒</span>
 }
 
 /* De øvrige knapper i naturligt flow med lodret afstand */
-.searchnew,
-.history,
+.searchnew{
+  position: static;
+  display: block;
+  margin: 1rem auto;
+}
+
+.history{
+  position: static;
+  display: block;
+  margin: 1rem auto;
+}
+
 .favorite {
   position: static;
   display: block;

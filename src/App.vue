@@ -11,7 +11,7 @@ function goHome() {
 
 <template>
   <div class="app-container">
-    <header class="topbar">
+  
       <img
         src="/logo.png"
         alt="Madlogo"
@@ -19,7 +19,7 @@ function goHome() {
         @click="goHome"
       />
       <button class="home-button" @click="goHome">Home Page</button>
-    </header>
+  
 
     <main class="main-content">
       <RouterView />
@@ -32,30 +32,26 @@ function goHome() {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #42b883;
-  padding: 1rem 2rem;
-  color: white;
+  align-items: center;  /* Center content horizontally */
+  justify-content: center;  /* Center content vertically */
 }
 
 .logo {
-  height: 60px;
+  width: 120px;
+  height: auto;
   cursor: pointer;
+  margin-bottom: 1rem;  /* Add some space below the logo */
 }
 
 .home-button {
   background-color: white;
   color: #42b883;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  text-align: center;
 }
 
 .home-button:hover {

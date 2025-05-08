@@ -18,15 +18,15 @@
 <style>
 /* Position af knapper */
 .login{
-    position: absolute;
-top: 400px; 
-left: 50%;
+  position: static;
+  display: block;
+  margin: 1rem auto;
 }
 
 .signup{
-    position: absolute;
-top: 300px; 
-left: 50%;   
+  position: static;
+  display: block;
+  margin: 1rem auto;
 }
 </style> 
 
