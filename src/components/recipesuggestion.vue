@@ -18,12 +18,12 @@
       <li v-for="recipe in matchedeOpskrifter" :key="recipe.navn">
         <img :src="recipe.billede" alt="Billede af retten" width="200" />
         <h4>{{ recipe.navn }}</h4>
-        <p><strong>⏱ Tid:</strong> {{ recipe.tid }} minutter</p>
-        <p><strong>🍽 Portioner:</strong> {{ recipe.portioner }}</p>
-        <small>Kræver: {{ recipe.ingredienser.join(', ') }}</small>
+        <p><strong>⏱ Time:</strong> {{ recipe.tid }} minutes</p>
+        <p><strong>🍽 Portions:</strong> {{ recipe.portioner }}</p>
+        <small>Needs: {{ recipe.ingredienser.join(', ') }}</small>
         <br />
         <button @click="visGuide(recipe.id)">📘 Guide</button>
-        <button v-if="setlogin" @click="tilføjFavorit(recipe)">❤️ Favorit</button>
+        <button v-if="setlogin" @click="tilføjFavorit(recipe)">❤️ Favorite</button>
       </li>
     </ul>
   </div>
