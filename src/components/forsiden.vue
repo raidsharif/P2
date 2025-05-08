@@ -27,30 +27,30 @@ favorit <span v-if="!setlogin">🔒</span>
  </div>
 </template>
 
-<style>
-/* Positionering af knapper på siden */
-.login-signup{
-position: absolute;
-top: 20px; 
-right: 20px;
+<style scoped>
+/* Login / Opret øverst til højre på større skærme */
+.login-signup {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
-.searchnew{
-position: absolute;
-top: 40%;
-right: 48%; 
+/* På små skærme: flyt login-knappen ind i flowet så den ikke overlapper logo */
+@media (max-width: 640px) {
+  .login-signup {
+    position: static;
+    display: block;
+    margin: 1rem auto; /* centreret under logo */
+  }
 }
 
-.history{
-position: absolute;
-top: 50%;
-right: 50%;
-}
-
-.favorite{
-position: absolute;
-top: 60%;
-right: 50%;    
+/* De øvrige knapper i naturligt flow med lodret afstand */
+.searchnew,
+.history,
+.favorite {
+  position: static;
+  display: block;
+  margin: 1rem auto;
 }
 
 /* Grå og deaktiveret stil når knapper er låste */
@@ -58,8 +58,8 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 </style>
+
 
 
 
