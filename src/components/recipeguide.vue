@@ -2,23 +2,23 @@
   <div v-if="opskrift" class="guide-container">
     <h2>{{ opskrift.title }}</h2>
     <img :src="opskrift.imageUrl" style="max-width: 300px;" />
-    <p><strong>⏱ Tid:</strong> {{ opskrift.prepTimeMinutes }} minutter</p>
-    <p><strong>🍽 Portioner:</strong> {{ opskrift.servings }}</p>
-    <p><strong>Ingredienser:</strong></p>
+    <p><strong>⏱ Time:</strong> {{ opskrift.prepTimeMinutes }} minutes</p>
+    <p><strong>🍽 Portions:</strong> {{ opskrift.servings }}</p>
+    <p><strong>Ingredients:</strong></p>
     <ul>
       <li v-for="(ing, i) in opskrift.ingredienser" :key="i">🧂 {{ ing }}</li>
     </ul>
-    <p><strong>Sådan gør du:</strong></p>
+    <p><strong>Instructions:</strong></p>
     <p>{{ opskrift.instructions }}</p>
 
-    <button @click="router.push('/opskrafterliste')">🔙 Tilbage</button>
-    <button v-if="currentUser" @click="tilføjFavorit">❤️ Favorit</button>
+    <button @click="router.push('/opskrafterliste')">🔙 Go Back</button>
+    <button v-if="currentUser" @click="tilføjFavorit">❤️ Favorite</button>
   </div>
 
   <div v-else class="guide-container">
-    <h2>😕 Opskrift ikke fundet</h2>
-    <p>Vi kunne ikke finde guiden til denne opskrift.</p>
-    <button @click="router.push('/opskrafterliste')">🔙 Gå tilbage</button>
+    <h2>😕 No recipe found</h2>
+    <p>We couldn't find the guide.</p>
+    <button @click="router.push('/opskrafterliste')">🔙 Go Back</button>
   </div>
 </template>
 

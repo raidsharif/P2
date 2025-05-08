@@ -3,12 +3,12 @@
 
     <!-- Knap til login -->
     <div class = "login">
- <button @click="gotologin"> login </button>  
+ <button @click="gotologin"> Login </button>  
 </div>
 
 <!-- Knap til at oprette bruger -->
 <div class = "signup"> 
- <button @click="gotoopret"> register </button>  
+ <button @click="gotoopret"> Register </button>  
 </div>
 
 </div>

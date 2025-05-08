@@ -10,7 +10,7 @@
           <img :src="opskrift.imageUrl" style="max-width: 150px;">
           <br/>
           <button @click="visGuide(opskrift)">📘 Guide</button>
-          <button @click="fjernFavorit(opskrift)">🗑 Fjern</button>
+          <button @click="fjernFavorit(opskrift)">🗑 Remove</button>
         </li>
       </ul>
     </div>

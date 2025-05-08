@@ -1,12 +1,12 @@
 <template>
   <div class="ingredient-container">
-    <h2>Vælg de ingredienser du har</h2>
+    <h2>Choose your ingredients</h2>
 
     <!-- 🔍 Søg efter ingredienser i listen -->
     <input
       type="text"
       v-model="soegeord"
-      placeholder="Søg i listen..."
+      placeholder="Search from list..."
     />
 
     <!-- ✅ Liste over ingredienser (filtreret med søgning) -->
@@ -22,15 +22,15 @@
       <input
         type="text"
         v-model="nyIngrediens"
-        placeholder="Tilføj en ingrediens"
+        placeholder="Add ingredient"
         @keyup.enter="tilfoejIngrediens"
       />
-      <button @click="tilfoejIngrediens">Tilføj</button>
+      <button @click="tilfoejIngrediens">Add</button>
     </div>
 
     <!-- ✅ Valgte ingredienser -->
     <div class="valgte">
-      <h3>Du har valgt:</h3>
+      <h3>You have selected:</h3>
       <ul>
         <li v-for="item in ingredienser.filter(i => i.selected)" :key="item.name">
           ✅ {{ item.name }}
@@ -40,7 +40,7 @@
 
     <!-- 👉 Gå videre -->
     <div class="Next">
-      <button @click="gotoopskraft">Next</button>
+      <button @click="gotoopskraft">Search</button>
     </div>
   </div>
 </template>

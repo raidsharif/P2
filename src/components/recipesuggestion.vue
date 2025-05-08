@@ -1,19 +1,19 @@
 <template>
   <div class="suggestion-container">
-    <h2>Opskriftsforslag ud fra dine ingredienser</h2>
+    <h2>Recipe suggestions based on your ingredients</h2>
 
     <div v-if="!setlogin">
-      <p class="hint">🔓 Log ind for at få flere opskrifter fra databasen!</p>
+      <p class="hint">🔓 Log in to get more recipes from the database!</p>
     </div>
 
-    <p>Du har valgt:</p>
+    <p>You have chosen:</p>
     <ul>
       <li v-for="(item, index) in valgteIngredienser" :key="index">
         ✅ {{ item }}
       </li>
     </ul>
 
-    <h3>Vi foreslår:</h3>
+    <h3>We suggest:</h3>
     <ul>
       <li v-for="recipe in matchedeOpskrifter" :key="recipe.navn">
         <img :src="recipe.billede" alt="Billede af retten" width="200" />

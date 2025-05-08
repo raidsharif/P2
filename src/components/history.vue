@@ -1,10 +1,10 @@
 <template>
-  <div class="historik">
+  <div class="history">
     <h2>🕘 My History</h2>
 
-    <div v-if="historik.length">
+    <div v-if="history.length">
       <ul>
-        <li v-for="(opskrift, index) in historik" :key="index">
+        <li v-for="(opskrift, index) in history" :key="index">
           {{ opskrift.title }} ({{ opskrift.viewedAt }})
           <br />
           <img :src="opskrift.imageUrl" style="max-width: 150px;">
@@ -25,7 +25,7 @@ import { currentUser } from '../router/store'
 import { useRouter } from 'vue-router'
 
 
-const historik = ref([])
+const history = ref([])
 const router = useRouter()
 
 function visGuide(opskrift) {
@@ -35,8 +35,8 @@ function visGuide(opskrift) {
 onMounted(async () => {
   if (currentUser.value) {
     const res = await fetch(`http://localhost:5127/Henter-historik/${currentUser.value.userId}`)
-    historik.value = await res.json()
-    console.log("Historikdata:", historik.value)
+    history.value = await res.json()
+    console.log("Historikdata:", history.value)
 
   }
 })

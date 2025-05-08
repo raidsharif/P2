@@ -6,13 +6,13 @@
       <input
         type="text"
         v-model="username"
-        placeholder="skriv dit brugernavn"
+        placeholder="Username"
       />
   
       <input
         type="password"
         v-model="password"
-        placeholder="skriv din adgangskode"
+        placeholder="Password"
       />
         <!-- Login-knap -->
       <button @click="login">Login</button>

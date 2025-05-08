@@ -2,7 +2,7 @@
  <div>
     <!-- Knap til login eller opret -->
 <div class = "login-signup" v-if="!setlogin">
- <button @click="gotologinopret"> login/opret </button>   
+ <button @click="gotologinopret"> Log in/Sign Up </button>   
 </div>
 
  <!-- Knap til søgning af ny opskrift -->
@@ -13,14 +13,14 @@
  <!-- Knap til at vise tidligere brugte opskrifter -->
 <div class = "History">
  <button :disabled="!setlogin" @click="gohistorik">
-  historik <span v-if="!setlogin">🔒</span>
+  Recipe History <span v-if="!setlogin">🔒</span>
  </button> 
  </div>
 
   <!-- Knap til favorit-opskrifter -->
 <div class = "Favorite">
 <button :disabled="!setlogin" @click="gofavoritter"> 
-favorit <span v-if="!setlogin">🔒</span>
+Favorites <span v-if="!setlogin">🔒</span>
 </button>
 </div>
 

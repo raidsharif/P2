@@ -1,27 +1,27 @@
 <template>
     <div class="form-container">
-      <h2>Opret Bruger</h2>
+      <h2>Register User</h2>
 
        <!-- Inputfelter til brugernavn og adgangskoder -->
       <input
         type="tekst"
         v-model="username"
-        placeholder="lav et brugernavn"
+        placeholder="Username"
       />
   
       <input
         type="password"
         v-model="password"
-        placeholder="lav en adgangskode"
+        placeholder="Password"
       />
 
       <input
         type="password"
         v-model="password2"
-        placeholder="gentage adgangskode"
+        placeholder="Repeat password"
       />
         <!-- Knap til oprettelse -->
-      <button @click="signup">Opret Bruger</button>
+      <button @click="signup">Create User</button>
     </div>
   </template>
   

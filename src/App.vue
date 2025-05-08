@@ -18,7 +18,7 @@ function goHome() {
         class="logo"
         @click="goHome"
       />
-      <button class="home-button" @click="goHome">🏠 Forside</button>
+      <button class="home-button" @click="goHome">Home Page</button>
     </header>
 
     <main class="main-content">
