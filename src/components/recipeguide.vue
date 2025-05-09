@@ -48,7 +48,7 @@ onMounted(async () => {
   }
 
   if (currentUser.value) {
-    await fetch('http://localhost:5127/fetch-recipes', {
+    await fetch('http://localhost:5127/opskrifter', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
