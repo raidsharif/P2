@@ -78,7 +78,6 @@ const ingredienser = ref([
     { name: 'Ketchup', selected: false },
     { name: 'Mayonnaise', selected: false },
 
-    { name: 'Chicken', selected: false },
     { name: 'Beef', selected: false },
     { name: 'Tuna (canned)', selected: false },
     { name: 'Salmon', selected: false },
